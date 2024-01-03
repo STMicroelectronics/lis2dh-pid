@@ -706,10 +706,10 @@ typedef union
  * them with a custom implementation.
  */
 
-int32_t lis2dh_read_reg(stmdev_ctx_t *ctx, uint8_t reg,
+int32_t lis2dh_read_reg(const stmdev_ctx_t *ctx, uint8_t reg,
                         uint8_t *data,
                         uint16_t len);
-int32_t lis2dh_write_reg(stmdev_ctx_t *ctx, uint8_t reg,
+int32_t lis2dh_write_reg(const stmdev_ctx_t *ctx, uint8_t reg,
                          uint8_t *data,
                          uint16_t len);
 
@@ -731,24 +731,24 @@ float_t lis2dh_from_fs8_lp_to_mg(int16_t lsb);
 float_t lis2dh_from_fs16_lp_to_mg(int16_t lsb);
 float_t lis2dh_from_lsb_lp_to_celsius(int16_t lsb);
 
-int32_t lis2dh_int_count_get(stmdev_ctx_t *ctx, uint8_t *val);
+int32_t lis2dh_int_count_get(const stmdev_ctx_t *ctx, uint8_t *val);
 
-int32_t lis2dh_temp_status_reg_get(stmdev_ctx_t *ctx, uint8_t *buff);
+int32_t lis2dh_temp_status_reg_get(const stmdev_ctx_t *ctx, uint8_t *buff);
 
-int32_t lis2dh_temp_data_ready_get(stmdev_ctx_t *ctx, uint8_t *val);
+int32_t lis2dh_temp_data_ready_get(const stmdev_ctx_t *ctx, uint8_t *val);
 
-int32_t lis2dh_temp_data_ovr_get(stmdev_ctx_t *ctx, uint8_t *val);
+int32_t lis2dh_temp_data_ovr_get(const stmdev_ctx_t *ctx, uint8_t *val);
 
-int32_t lis2dh_temperature_raw_get(stmdev_ctx_t *ctx, int16_t *val);
+int32_t lis2dh_temperature_raw_get(const stmdev_ctx_t *ctx, int16_t *val);
 
 typedef enum
 {
   LIS2DH_TEMP_DISABLE  = 0,
   LIS2DH_TEMP_ENABLE   = 3,
 } lis2dh_temp_en_t;
-int32_t lis2dh_temperature_meas_set(stmdev_ctx_t *ctx,
+int32_t lis2dh_temperature_meas_set(const stmdev_ctx_t *ctx,
                                     lis2dh_temp_en_t val);
-int32_t lis2dh_temperature_meas_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_temperature_meas_get(const stmdev_ctx_t *ctx,
                                     lis2dh_temp_en_t *val);
 
 typedef enum
@@ -757,9 +757,9 @@ typedef enum
   LIS2DH_NM_10bit   = 1,
   LIS2DH_LP_8bit    = 2,
 } lis2dh_op_md_t;
-int32_t lis2dh_operating_mode_set(stmdev_ctx_t *ctx,
+int32_t lis2dh_operating_mode_set(const stmdev_ctx_t *ctx,
                                   lis2dh_op_md_t val);
-int32_t lis2dh_operating_mode_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_operating_mode_get(const stmdev_ctx_t *ctx,
                                   lis2dh_op_md_t *val);
 
 typedef enum
@@ -775,13 +775,13 @@ typedef enum
   LIS2DH_ODR_1kHz620_LP                  = 0x08,
   LIS2DH_ODR_5kHz376_LP_1kHz344_NM_HP    = 0x09,
 } lis2dh_odr_t;
-int32_t lis2dh_data_rate_set(stmdev_ctx_t *ctx, lis2dh_odr_t val);
-int32_t lis2dh_data_rate_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_data_rate_set(const stmdev_ctx_t *ctx, lis2dh_odr_t val);
+int32_t lis2dh_data_rate_get(const stmdev_ctx_t *ctx,
                              lis2dh_odr_t *val);
 
-int32_t lis2dh_high_pass_on_outputs_set(stmdev_ctx_t *ctx,
+int32_t lis2dh_high_pass_on_outputs_set(const stmdev_ctx_t *ctx,
                                         uint8_t val);
-int32_t lis2dh_high_pass_on_outputs_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_high_pass_on_outputs_get(const stmdev_ctx_t *ctx,
                                         uint8_t *val);
 
 typedef enum
@@ -791,9 +791,9 @@ typedef enum
   LIS2DH_MEDIUM      = 2,
   LIS2DH_LIGHT       = 3,
 } lis2dh_hpcf_t;
-int32_t lis2dh_high_pass_bandwidth_set(stmdev_ctx_t *ctx,
+int32_t lis2dh_high_pass_bandwidth_set(const stmdev_ctx_t *ctx,
                                        lis2dh_hpcf_t val);
-int32_t lis2dh_high_pass_bandwidth_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_high_pass_bandwidth_get(const stmdev_ctx_t *ctx,
                                        lis2dh_hpcf_t *val);
 
 typedef enum
@@ -803,9 +803,9 @@ typedef enum
   LIS2DH_NORMAL           = 2,
   LIS2DH_AUTORST_ON_INT   = 3,
 } lis2dh_hpm_t;
-int32_t lis2dh_high_pass_mode_set(stmdev_ctx_t *ctx,
+int32_t lis2dh_high_pass_mode_set(const stmdev_ctx_t *ctx,
                                   lis2dh_hpm_t val);
-int32_t lis2dh_high_pass_mode_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_high_pass_mode_get(const stmdev_ctx_t *ctx,
                                   lis2dh_hpm_t *val);
 
 typedef enum
@@ -815,28 +815,28 @@ typedef enum
   LIS2DH_8g   = 2,
   LIS2DH_16g  = 3,
 } lis2dh_fs_t;
-int32_t lis2dh_full_scale_set(stmdev_ctx_t *ctx, lis2dh_fs_t val);
-int32_t lis2dh_full_scale_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_full_scale_set(const stmdev_ctx_t *ctx, lis2dh_fs_t val);
+int32_t lis2dh_full_scale_get(const stmdev_ctx_t *ctx,
                               lis2dh_fs_t *val);
 
-int32_t lis2dh_block_data_update_set(stmdev_ctx_t *ctx,
+int32_t lis2dh_block_data_update_set(const stmdev_ctx_t *ctx,
                                      uint8_t val);
-int32_t lis2dh_block_data_update_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_block_data_update_get(const stmdev_ctx_t *ctx,
                                      uint8_t *val);
 
-int32_t lis2dh_filter_reference_set(stmdev_ctx_t *ctx,
+int32_t lis2dh_filter_reference_set(const stmdev_ctx_t *ctx,
                                     uint8_t *buff);
-int32_t lis2dh_filter_reference_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_filter_reference_get(const stmdev_ctx_t *ctx,
                                     uint8_t *buff);
 
-int32_t lis2dh_xl_data_ready_get(stmdev_ctx_t *ctx, uint8_t *val);
+int32_t lis2dh_xl_data_ready_get(const stmdev_ctx_t *ctx, uint8_t *val);
 
-int32_t lis2dh_xl_data_ovr_get(stmdev_ctx_t *ctx, uint8_t *val);
+int32_t lis2dh_xl_data_ovr_get(const stmdev_ctx_t *ctx, uint8_t *val);
 
-int32_t lis2dh_acceleration_raw_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_acceleration_raw_get(const stmdev_ctx_t *ctx,
                                     int16_t *val);
 
-int32_t lis2dh_device_id_get(stmdev_ctx_t *ctx, uint8_t *buff);
+int32_t lis2dh_device_id_get(const stmdev_ctx_t *ctx, uint8_t *buff);
 
 typedef enum
 {
@@ -844,59 +844,59 @@ typedef enum
   LIS2DH_ST_POSITIVE  = 1,
   LIS2DH_ST_NEGATIVE  = 2,
 } lis2dh_st_t;
-int32_t lis2dh_self_test_set(stmdev_ctx_t *ctx, lis2dh_st_t val);
-int32_t lis2dh_self_test_get(stmdev_ctx_t *ctx, lis2dh_st_t *val);
+int32_t lis2dh_self_test_set(const stmdev_ctx_t *ctx, lis2dh_st_t val);
+int32_t lis2dh_self_test_get(const stmdev_ctx_t *ctx, lis2dh_st_t *val);
 
 typedef enum
 {
   LIS2DH_LSB_AT_LOW_ADD = 0,
   LIS2DH_MSB_AT_LOW_ADD = 1,
 } lis2dh_ble_t;
-int32_t lis2dh_data_format_set(stmdev_ctx_t *ctx,
+int32_t lis2dh_data_format_set(const stmdev_ctx_t *ctx,
                                lis2dh_ble_t val);
-int32_t lis2dh_data_format_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_data_format_get(const stmdev_ctx_t *ctx,
                                lis2dh_ble_t *val);
 
-int32_t lis2dh_boot_set(stmdev_ctx_t *ctx, uint8_t val);
-int32_t lis2dh_boot_get(stmdev_ctx_t *ctx, uint8_t *val);
+int32_t lis2dh_boot_set(const stmdev_ctx_t *ctx, uint8_t val);
+int32_t lis2dh_boot_get(const stmdev_ctx_t *ctx, uint8_t *val);
 
-int32_t lis2dh_status_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_status_get(const stmdev_ctx_t *ctx,
                           lis2dh_status_reg_t *val);
 
-int32_t lis2dh_int1_gen_conf_set(stmdev_ctx_t *ctx,
+int32_t lis2dh_int1_gen_conf_set(const stmdev_ctx_t *ctx,
                                  lis2dh_int1_cfg_t *val);
-int32_t lis2dh_int1_gen_conf_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_int1_gen_conf_get(const stmdev_ctx_t *ctx,
                                  lis2dh_int1_cfg_t *val);
 
-int32_t lis2dh_int1_gen_source_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_int1_gen_source_get(const stmdev_ctx_t *ctx,
                                    lis2dh_int1_src_t *val);
 
-int32_t lis2dh_int1_gen_threshold_set(stmdev_ctx_t *ctx,
+int32_t lis2dh_int1_gen_threshold_set(const stmdev_ctx_t *ctx,
                                       uint8_t val);
-int32_t lis2dh_int1_gen_threshold_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_int1_gen_threshold_get(const stmdev_ctx_t *ctx,
                                       uint8_t *val);
 
-int32_t lis2dh_int1_gen_duration_set(stmdev_ctx_t *ctx,
+int32_t lis2dh_int1_gen_duration_set(const stmdev_ctx_t *ctx,
                                      uint8_t val);
-int32_t lis2dh_int1_gen_duration_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_int1_gen_duration_get(const stmdev_ctx_t *ctx,
                                      uint8_t *val);
 
-int32_t lis2dh_int2_gen_conf_set(stmdev_ctx_t *ctx,
+int32_t lis2dh_int2_gen_conf_set(const stmdev_ctx_t *ctx,
                                  lis2dh_int2_cfg_t *val);
-int32_t lis2dh_int2_gen_conf_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_int2_gen_conf_get(const stmdev_ctx_t *ctx,
                                  lis2dh_int2_cfg_t *val);
 
-int32_t lis2dh_int2_gen_source_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_int2_gen_source_get(const stmdev_ctx_t *ctx,
                                    lis2dh_int2_src_t *val);
 
-int32_t lis2dh_int2_gen_threshold_set(stmdev_ctx_t *ctx,
+int32_t lis2dh_int2_gen_threshold_set(const stmdev_ctx_t *ctx,
                                       uint8_t val);
-int32_t lis2dh_int2_gen_threshold_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_int2_gen_threshold_get(const stmdev_ctx_t *ctx,
                                       uint8_t *val);
 
-int32_t lis2dh_int2_gen_duration_set(stmdev_ctx_t *ctx,
+int32_t lis2dh_int2_gen_duration_set(const stmdev_ctx_t *ctx,
                                      uint8_t val);
-int32_t lis2dh_int2_gen_duration_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_int2_gen_duration_get(const stmdev_ctx_t *ctx,
                                      uint8_t *val);
 
 typedef enum
@@ -910,19 +910,19 @@ typedef enum
   LIS2DH_ON_INT2_TAP_GEN          = 6,
   LIS2DH_ON_INT1_INT2_TAP_GEN     = 7,
 } lis2dh_hp_t;
-int32_t lis2dh_high_pass_int_conf_set(stmdev_ctx_t *ctx,
+int32_t lis2dh_high_pass_int_conf_set(const stmdev_ctx_t *ctx,
                                       lis2dh_hp_t val);
-int32_t lis2dh_high_pass_int_conf_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_high_pass_int_conf_get(const stmdev_ctx_t *ctx,
                                       lis2dh_hp_t *val);
 
-int32_t lis2dh_pin_int1_config_set(stmdev_ctx_t *ctx,
+int32_t lis2dh_pin_int1_config_set(const stmdev_ctx_t *ctx,
                                    lis2dh_ctrl_reg3_t *val);
-int32_t lis2dh_pin_int1_config_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_pin_int1_config_get(const stmdev_ctx_t *ctx,
                                    lis2dh_ctrl_reg3_t *val);
 
-int32_t lis2dh_int2_pin_detect_4d_set(stmdev_ctx_t *ctx,
+int32_t lis2dh_int2_pin_detect_4d_set(const stmdev_ctx_t *ctx,
                                       uint8_t val);
-int32_t lis2dh_int2_pin_detect_4d_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_int2_pin_detect_4d_get(const stmdev_ctx_t *ctx,
                                       uint8_t *val);
 
 typedef enum
@@ -930,14 +930,14 @@ typedef enum
   LIS2DH_INT2_PULSED   = 0,
   LIS2DH_INT2_LATCHED  = 1,
 } lis2dh_lir_int2_t;
-int32_t lis2dh_int2_pin_notification_mode_set(stmdev_ctx_t *ctx,
+int32_t lis2dh_int2_pin_notification_mode_set(const stmdev_ctx_t *ctx,
                                               lis2dh_lir_int2_t val);
-int32_t lis2dh_int2_pin_notification_mode_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_int2_pin_notification_mode_get(const stmdev_ctx_t *ctx,
                                               lis2dh_lir_int2_t *val);
 
-int32_t lis2dh_int1_pin_detect_4d_set(stmdev_ctx_t *ctx,
+int32_t lis2dh_int1_pin_detect_4d_set(const stmdev_ctx_t *ctx,
                                       uint8_t val);
-int32_t lis2dh_int1_pin_detect_4d_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_int1_pin_detect_4d_get(const stmdev_ctx_t *ctx,
                                       uint8_t *val);
 
 typedef enum
@@ -945,30 +945,30 @@ typedef enum
   LIS2DH_INT1_PULSED   = 0,
   LIS2DH_INT1_LATCHED  = 1,
 } lis2dh_lir_int1_t;
-int32_t lis2dh_int1_pin_notification_mode_set(stmdev_ctx_t *ctx,
+int32_t lis2dh_int1_pin_notification_mode_set(const stmdev_ctx_t *ctx,
                                               lis2dh_lir_int1_t val);
-int32_t lis2dh_int1_pin_notification_mode_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_int1_pin_notification_mode_get(const stmdev_ctx_t *ctx,
                                               lis2dh_lir_int1_t *val);
 
-int32_t lis2dh_pin_int2_config_set(stmdev_ctx_t *ctx,
+int32_t lis2dh_pin_int2_config_set(const stmdev_ctx_t *ctx,
                                    lis2dh_ctrl_reg6_t *val);
-int32_t lis2dh_pin_int2_config_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_pin_int2_config_get(const stmdev_ctx_t *ctx,
                                    lis2dh_ctrl_reg6_t *val);
 
-int32_t lis2dh_fifo_set(stmdev_ctx_t *ctx, uint8_t val);
-int32_t lis2dh_fifo_get(stmdev_ctx_t *ctx, uint8_t *val);
+int32_t lis2dh_fifo_set(const stmdev_ctx_t *ctx, uint8_t val);
+int32_t lis2dh_fifo_get(const stmdev_ctx_t *ctx, uint8_t *val);
 
-int32_t lis2dh_fifo_watermark_set(stmdev_ctx_t *ctx, uint8_t val);
-int32_t lis2dh_fifo_watermark_get(stmdev_ctx_t *ctx, uint8_t *val);
+int32_t lis2dh_fifo_watermark_set(const stmdev_ctx_t *ctx, uint8_t val);
+int32_t lis2dh_fifo_watermark_get(const stmdev_ctx_t *ctx, uint8_t *val);
 
 typedef enum
 {
   LIS2DH_INT1_GEN = 0,
   LIS2DH_INT2_GEN = 1,
 } lis2dh_tr_t;
-int32_t lis2dh_fifo_trigger_event_set(stmdev_ctx_t *ctx,
+int32_t lis2dh_fifo_trigger_event_set(const stmdev_ctx_t *ctx,
                                       lis2dh_tr_t val);
-int32_t lis2dh_fifo_trigger_event_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_fifo_trigger_event_get(const stmdev_ctx_t *ctx,
                                       lis2dh_tr_t *val);
 
 typedef enum
@@ -978,55 +978,55 @@ typedef enum
   LIS2DH_DYNAMIC_STREAM_MODE   = 2,
   LIS2DH_STREAM_TO_FIFO_MODE   = 3,
 } lis2dh_fm_t;
-int32_t lis2dh_fifo_mode_set(stmdev_ctx_t *ctx, lis2dh_fm_t val);
-int32_t lis2dh_fifo_mode_get(stmdev_ctx_t *ctx, lis2dh_fm_t *val);
+int32_t lis2dh_fifo_mode_set(const stmdev_ctx_t *ctx, lis2dh_fm_t val);
+int32_t lis2dh_fifo_mode_get(const stmdev_ctx_t *ctx, lis2dh_fm_t *val);
 
-int32_t lis2dh_fifo_status_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_fifo_status_get(const stmdev_ctx_t *ctx,
                                lis2dh_fifo_src_reg_t *val);
 
-int32_t lis2dh_fifo_data_level_get(stmdev_ctx_t *ctx, uint8_t *val);
+int32_t lis2dh_fifo_data_level_get(const stmdev_ctx_t *ctx, uint8_t *val);
 
-int32_t lis2dh_fifo_empty_flag_get(stmdev_ctx_t *ctx, uint8_t *val);
+int32_t lis2dh_fifo_empty_flag_get(const stmdev_ctx_t *ctx, uint8_t *val);
 
-int32_t lis2dh_fifo_ovr_flag_get(stmdev_ctx_t *ctx, uint8_t *val);
+int32_t lis2dh_fifo_ovr_flag_get(const stmdev_ctx_t *ctx, uint8_t *val);
 
-int32_t lis2dh_fifo_fth_flag_get(stmdev_ctx_t *ctx, uint8_t *val);
+int32_t lis2dh_fifo_fth_flag_get(const stmdev_ctx_t *ctx, uint8_t *val);
 
-int32_t lis2dh_tap_conf_set(stmdev_ctx_t *ctx,
+int32_t lis2dh_tap_conf_set(const stmdev_ctx_t *ctx,
                             lis2dh_click_cfg_t *val);
-int32_t lis2dh_tap_conf_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_tap_conf_get(const stmdev_ctx_t *ctx,
                             lis2dh_click_cfg_t *val);
 
-int32_t lis2dh_tap_source_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_tap_source_get(const stmdev_ctx_t *ctx,
                               lis2dh_click_src_t *val);
 
-int32_t lis2dh_tap_threshold_set(stmdev_ctx_t *ctx, uint8_t val);
-int32_t lis2dh_tap_threshold_get(stmdev_ctx_t *ctx, uint8_t *val);
+int32_t lis2dh_tap_threshold_set(const stmdev_ctx_t *ctx, uint8_t val);
+int32_t lis2dh_tap_threshold_get(const stmdev_ctx_t *ctx, uint8_t *val);
 
-int32_t lis2dh_shock_dur_set(stmdev_ctx_t *ctx, uint8_t val);
-int32_t lis2dh_shock_dur_get(stmdev_ctx_t *ctx, uint8_t *val);
+int32_t lis2dh_shock_dur_set(const stmdev_ctx_t *ctx, uint8_t val);
+int32_t lis2dh_shock_dur_get(const stmdev_ctx_t *ctx, uint8_t *val);
 
-int32_t lis2dh_quiet_dur_set(stmdev_ctx_t *ctx, uint8_t val);
-int32_t lis2dh_quiet_dur_get(stmdev_ctx_t *ctx, uint8_t *val);
+int32_t lis2dh_quiet_dur_set(const stmdev_ctx_t *ctx, uint8_t val);
+int32_t lis2dh_quiet_dur_get(const stmdev_ctx_t *ctx, uint8_t *val);
 
-int32_t lis2dh_double_tap_timeout_set(stmdev_ctx_t *ctx,
+int32_t lis2dh_double_tap_timeout_set(const stmdev_ctx_t *ctx,
                                       uint8_t val);
-int32_t lis2dh_double_tap_timeout_get(stmdev_ctx_t *ctx,
+int32_t lis2dh_double_tap_timeout_get(const stmdev_ctx_t *ctx,
                                       uint8_t *val);
 
-int32_t lis2dh_act_threshold_set(stmdev_ctx_t *ctx, uint8_t val);
-int32_t lis2dh_act_threshold_get(stmdev_ctx_t *ctx, uint8_t *val);
+int32_t lis2dh_act_threshold_set(const stmdev_ctx_t *ctx, uint8_t val);
+int32_t lis2dh_act_threshold_get(const stmdev_ctx_t *ctx, uint8_t *val);
 
-int32_t lis2dh_act_timeout_set(stmdev_ctx_t *ctx, uint8_t val);
-int32_t lis2dh_act_timeout_get(stmdev_ctx_t *ctx, uint8_t *val);
+int32_t lis2dh_act_timeout_set(const stmdev_ctx_t *ctx, uint8_t val);
+int32_t lis2dh_act_timeout_get(const stmdev_ctx_t *ctx, uint8_t *val);
 
 typedef enum
 {
   LIS2DH_SPI_4_WIRE = 0,
   LIS2DH_SPI_3_WIRE = 1,
 } lis2dh_sim_t;
-int32_t lis2dh_spi_mode_set(stmdev_ctx_t *ctx, lis2dh_sim_t val);
-int32_t lis2dh_spi_mode_get(stmdev_ctx_t *ctx, lis2dh_sim_t *val);
+int32_t lis2dh_spi_mode_set(const stmdev_ctx_t *ctx, lis2dh_sim_t val);
+int32_t lis2dh_spi_mode_get(const stmdev_ctx_t *ctx, lis2dh_sim_t *val);
 
 /**
   * @}
