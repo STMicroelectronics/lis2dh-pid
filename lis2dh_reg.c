@@ -235,6 +235,9 @@ int32_t lis2dh_temp_data_ready_get(const stmdev_ctx_t *ctx, uint8_t *val)
 
   ret = lis2dh_read_reg(ctx, LIS2DH_STATUS_REG_AUX,
                         (uint8_t *)&status_reg_aux, 1);
+
+  if (ret != 0) { return ret; }
+
   *val = status_reg_aux.tda;
 
   return ret;
@@ -255,6 +258,9 @@ int32_t lis2dh_temp_data_ovr_get(const stmdev_ctx_t *ctx, uint8_t *val)
 
   ret = lis2dh_read_reg(ctx, LIS2DH_STATUS_REG_AUX,
                         (uint8_t *)&status_reg_aux, 1);
+
+  if (ret != 0) { return ret; }
+
   *val = status_reg_aux.tor;
 
   return ret;
@@ -273,6 +279,9 @@ int32_t lis2dh_temperature_raw_get(const stmdev_ctx_t *ctx, int16_t *val)
   int32_t ret;
 
   ret = lis2dh_read_reg(ctx, LIS2DH_OUT_TEMP_L, buff, 2);
+
+  if (ret != 0) { return ret; }
+
   *val = (int16_t)buff[1];
   *val = (*val * 256) + (int16_t)buff[0];
 
@@ -321,6 +330,8 @@ int32_t lis2dh_temperature_meas_get(const stmdev_ctx_t *ctx,
 
   ret = lis2dh_read_reg(ctx, LIS2DH_TEMP_CFG_REG,
                         (uint8_t *)&temp_cfg_reg, 1);
+
+  if (ret != 0) { return ret; }
 
   switch (temp_cfg_reg.temp_en)
   {
@@ -416,11 +427,11 @@ int32_t lis2dh_operating_mode_get(const stmdev_ctx_t *ctx,
   ret = lis2dh_read_reg(ctx, LIS2DH_CTRL_REG1,
                         (uint8_t *)&ctrl_reg1, 1);
 
+  ret += lis2dh_read_reg(ctx, LIS2DH_CTRL_REG4,
+                        (uint8_t *)&ctrl_reg4, 1);
+
   if (ret == 0)
   {
-    ret = lis2dh_read_reg(ctx, LIS2DH_CTRL_REG4,
-                          (uint8_t *)&ctrl_reg4, 1);
-
     if (ctrl_reg1.lpen == PROPERTY_ENABLE)
     {
       *val = LIS2DH_LP_8bit;
